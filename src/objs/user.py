@@ -1,4 +1,10 @@
 class User:
+    _id: int
+    _name: str
+    _address: str
+    _email: str
+    _phoneNum: str
+
     #constructor needs all information to instantiate object
     def __init__(self, id, name, address, email, phoneNum):
         self.id = id
