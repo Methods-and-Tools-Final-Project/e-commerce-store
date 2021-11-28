@@ -160,10 +160,3 @@ def writeUsers(userList):
             
     else:
         raise Exception("Users.csv file does not exist")
-
-def main():
-    users = getUsers()
-    for user in users:
-        print(user.toString())
-
-main()
