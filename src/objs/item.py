@@ -16,7 +16,7 @@ class Item:
     
     #to string method
     def toString(self):
-        print(f'{self.id} + {self.name} + {self.price} + {self.cateogry} + {self.quantity}')
+        return (f'{self.id},{self.name},{self.price},{self.cateogry},{self.quantity}')
 
     #getters
     def getID(self):

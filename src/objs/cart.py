@@ -11,7 +11,7 @@ class Cart:
     
     #to string method
     def toString(self):
-        print(f'{self.userid} + {self.itemid} + {self.quantity}')
+        return (f'{self.userid},{self.itemid},{self.quantity}')
 
     #getters
     def getUserID(self):

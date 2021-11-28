@@ -9,17 +9,17 @@ from objs.purchase import Purchase
 from objs.user import User
 
 def getCarts():
-    fileExists = exists("data/carts.csv")
+    fileExists = exists("src/data/carts.csv")
 
     if (fileExists):
         retList = []
 
-        lines = tuple(open("data/carts.csv", 'r'))
+        lines = tuple(open("src/data/carts.csv", 'r'))
 
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) is not 3):
+            if (len(parts) != 3):
                 raise Exception("Given line cannot be serialized to a cart object: ", line)
             else:
                 retList.append(Cart(parts[0], parts[1], parts[2]))
@@ -30,17 +30,17 @@ def getCarts():
         raise Exception("Carts.csv file does not exist")
 
 def getItems():
-    fileExists = exists("data/items.csv")
+    fileExists = exists("src/data/items.csv")
 
     if (fileExists):
         retList = []
 
-        lines = tuple(open("data/items.csv", 'r'))
+        lines = tuple(open("src/data/items.csv", 'r'))
 
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) is not 5):
+            if (len(parts) != 5):
                 raise Exception("Given line cannot be serialized to an item object: ", line)
             else:
                 retList.append(Item(parts[0], parts[1], parts[2], parts[3], parts[4]))
@@ -51,17 +51,17 @@ def getItems():
         raise Exception("Items.csv file does not exist")
 
 def getPurchases():
-    fileExists = exists("data/purchases.csv")
+    fileExists = exists("src/data/purchases.csv")
 
     if (fileExists):
         retList = []
 
-        lines = tuple(open("data/purchases.csv", 'r'))
+        lines = tuple(open("src/data/purchases.csv", 'r'))
 
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) is not 4):
+            if (len(parts) != 4):
                 raise Exception("Given line cannot be serialized to a purchase object: ", line)
             else:
                 retList.append(Purchase(parts[0], parts[1], parts[2], parts[3]))
@@ -72,17 +72,17 @@ def getPurchases():
         raise Exception("Purchases.csv file does not exist")
 
 def getUsers():
-    fileExists = exists("data/users.csv")
+    fileExists = exists("src/data/users.csv")
 
     if (fileExists):
         retList = []
 
-        lines = tuple(open("data/users.csv", 'r'))
+        lines = tuple(open("src/data/users.csv", 'r'))
 
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) is not 5):
+            if (len(parts) != 5):
                 raise Exception("Given line cannot be serialized to a user object: ", line)
             else:
                 retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4]))
@@ -94,7 +94,20 @@ def getUsers():
 
 def writeCarts(cartList):
     print("Writing passed list containing ", len(cartList), " carts to carts.csv")
-    #todo
+    
+    fileExists = exists("src/data/carts.csv")
+
+    if (fileExists):
+        lines = []
+
+        for cart in cartList:
+            lines.append(cart.toString())
+
+        with open('src/data/carts.csv', 'w') as f:
+            f.writelines(lines)
+            
+    else:
+        raise Exception("Carts.csv file does not exist")
 
 def writeItems(itemList):
     print("Writing passed list containing ", len(itemList), " items to items.csv")
