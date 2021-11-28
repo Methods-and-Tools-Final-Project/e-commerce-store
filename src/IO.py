@@ -111,12 +111,59 @@ def writeCarts(cartList):
 
 def writeItems(itemList):
     print("Writing passed list containing ", len(itemList), " items to items.csv")
-    #todo
+    
+    fileExists = exists("src/data/items.csv")
+
+    if (fileExists):
+        lines = []
+
+        for item in itemList:
+            lines.append(item.toString())
+
+        with open('src/data/items.csv', 'w') as f:
+            f.writelines(lines)
+            
+    else:
+        raise Exception("Items.csv file does not exist")
+
 
 def writePurchases(purchaseList):
     print("Writing passed list containing ", len(purchaseList), " purchases to purchases.csv")
-    #todo
+    
+    fileExists = exists("src/data/purchases.csv")
+
+    if (fileExists):
+        lines = []
+
+        for purchase in purchaseList:
+            lines.append(purchase.toString())
+
+        with open('src/data/purchases.csv', 'w') as f:
+            f.writelines(lines)
+            
+    else:
+        raise Exception("Purchases.csv file does not exist")
 
 def writeUsers(userList):
     print("Writing passed list containing ", len(userList), " users to users.csv")
-    #todo
+    
+    fileExists = exists("src/data/users.csv")
+
+    if (fileExists):
+        lines = []
+
+        for user in userList:
+            lines.append(user.toString())
+
+        with open('src/data/users.csv', 'w') as f:
+            f.writelines(lines)
+            
+    else:
+        raise Exception("Users.csv file does not exist")
+
+def main():
+    users = getUsers()
+    for user in users:
+        print(user.toString())
+
+main()
