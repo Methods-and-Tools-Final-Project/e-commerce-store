@@ -94,7 +94,20 @@ def getUsers():
 
 def writeCarts(cartList):
     print("Writing passed list containing ", len(cartList), " carts to carts.csv")
-    #todo
+    
+    fileExists = exists("data/carts.csv")
+
+    if (fileExists):
+        lines = []
+
+        for cart in cartList:
+            lines.append(cart.getUserID(),",",cart.getItemID(),",",cart.getQuantity())
+
+        with open('data/carts.csv', 'w') as f:
+            f.writelines(lines)
+            
+    else:
+        raise Exception("Carts.csv file does not exist")
 
 def writeItems(itemList):
     print("Writing passed list containing ", len(itemList), " items to items.csv")
