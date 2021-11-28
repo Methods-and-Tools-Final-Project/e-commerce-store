@@ -4,6 +4,9 @@
 
 from os.path import exists
 from objs.cart import Cart
+from objs.item import Item
+from objs.purchase import Purchase
+from objs.user import User
 
 def getCarts():
     fileExists = exists("data/carts.csv")
@@ -27,13 +30,67 @@ def getCarts():
         raise Exception("Carts.csv file does not exist")
 
 def getItems():
-    return ""
+    fileExists = exists("data/items.csv")
+
+    if (fileExists):
+        retList = []
+
+        lines = tuple(open("data/items.csv", 'r'))
+
+        for line in lines:
+            parts = str(line).split(",")
+
+            if (len(parts) is not 5):
+                raise Exception("Given line cannot be serialized to an item object: ", line)
+            else:
+                retList.append(Item(parts[0], parts[1], parts[2], parts[3], parts[4]))
+        
+        return retList
+
+    else:
+        raise Exception("Items.csv file does not exist")
 
 def getPurchases():
-    return ""
+    fileExists = exists("data/purchases.csv")
+
+    if (fileExists):
+        retList = []
+
+        lines = tuple(open("data/purchases.csv", 'r'))
+
+        for line in lines:
+            parts = str(line).split(",")
+
+            if (len(parts) is not 4):
+                raise Exception("Given line cannot be serialized to a purchase object: ", line)
+            else:
+                retList.append(Purchase(parts[0], parts[1], parts[2], parts[3]))
+        
+        return retList
+
+    else:
+        raise Exception("Purchases.csv file does not exist")
 
 def getUsers():
-    return ""
+    fileExists = exists("data/users.csv")
+
+    if (fileExists):
+        retList = []
+
+        lines = tuple(open("data/users.csv", 'r'))
+
+        for line in lines:
+            parts = str(line).split(",")
+
+            if (len(parts) is not 5):
+                raise Exception("Given line cannot be serialized to a user object: ", line)
+            else:
+                retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4]))
+        
+        return retList
+
+    else:
+        raise Exception("Users.csv file does not exist")
 
 def writeCarts(cartList):
     print("Writing passed list containing ", len(cartList), " carts to carts.csv")
