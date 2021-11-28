@@ -13,7 +13,7 @@ class Purchase:
     
     #to string method
     def toString(self):
-        print(f'{self.userid} + {self.itemid} + {self.quantity} + {self.time}')
+        return (f'{self.userid},{self.itemid},{self.quantity},{self.time}')
 
     #getters
     def getUserID(self):

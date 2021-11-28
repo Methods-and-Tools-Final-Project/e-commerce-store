@@ -15,7 +15,7 @@ class User:
     
     #to string method
     def toString(self):
-        print(f'{self.id} + {self.name} + {self.address} + {self.email} + {self.phoneNum}')
+        return (f'{self.id},{self.name},{self.address},{self.email},{self.phoneNum}')
 
     #getters
     def getID(self):
