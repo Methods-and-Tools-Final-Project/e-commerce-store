@@ -2,6 +2,7 @@
 # the data directory, seriallizing the data into objects is also done here, changing data should be performed outside
 # of this class and then the method to write the objects to the files should be invoked from this class
 
+import os
 from os.path import exists
 from objs.cart import Cart
 from objs.item import Item
@@ -95,8 +96,6 @@ def getUsers():
 
 #set full contents of tables
 def writeCarts(cartList):
-    print("Writing passed list containing ", len(cartList), " carts to carts.csv")
-    
     fileExists = exists("src/data/carts.csv")
 
     if (fileExists):
@@ -105,15 +104,18 @@ def writeCarts(cartList):
         for cart in cartList:
             lines.append(cart.toString())
 
-        with open('src/data/carts.csv', 'w') as f:
-            f.writelines(lines)
+        print(len(lines))
+
+        f = open('src/data/carts.csv', 'w')
+        for line in lines:
+            if len(line) != 0:
+                f.write(line)
+        f.write("\n")
             
     else:
         raise Exception("Carts.csv file does not exist")
 
 def writeItems(itemList):
-    print("Writing passed list containing ", len(itemList), " items to items.csv")
-    
     fileExists = exists("src/data/items.csv")
 
     if (fileExists):
@@ -122,16 +124,19 @@ def writeItems(itemList):
         for item in itemList:
             lines.append(item.toString())
 
-        with open('src/data/items.csv', 'w') as f:
-            f.writelines(lines)
+        print(len(lines))
+
+        f = open('src/data/items.csv', 'w')
+        for line in lines:
+            if len(line) != 0:
+                f.write(line)
+        f.write("\n")
             
     else:
         raise Exception("Items.csv file does not exist")
 
 
 def writePurchases(purchaseList):
-    print("Writing passed list containing ", len(purchaseList), " purchases to purchases.csv")
-    
     fileExists = exists("src/data/purchases.csv")
 
     if (fileExists):
@@ -140,15 +145,19 @@ def writePurchases(purchaseList):
         for purchase in purchaseList:
             lines.append(purchase.toString())
 
-        with open('src/data/purchases.csv', 'w') as f:
-            f.writelines(lines)
+        print(len(lines))
+
+        f = open('src/data/purchases.csv', 'w')
+        for line in lines:
+            if len(line) != 0:
+                f.write(line)
+        f.write("\n")
             
     else:
         raise Exception("Purchases.csv file does not exist")
 
+
 def writeUsers(userList):
-    print("Writing passed list containing ", len(userList), " users to users.csv")
-    
     fileExists = exists("src/data/users.csv")
 
     if (fileExists):
@@ -157,34 +166,76 @@ def writeUsers(userList):
         for user in userList:
             lines.append(user.toString())
 
-        with open('src/data/users.csv', 'w') as f:
-            f.writelines(lines)
+        print(len(lines))
+
+        f = open('src/data/users.csv', 'w')
+        for line in lines:
+            if len(line) != 0:
+                f.write(line)
+        f.write("\n")
             
     else:
-        raise Exception("Users.csv file does not exist")
+        raise Exception("Useres.csv file does not exist")
 
 #add entries to tables object methods
-def addCartEntry(cart):
-    writeCarts(getCarts().append(cart))
+def addCartEntryByObj(cart):
+    carts = getCarts()
+    carts.append(cart)
+    writeCarts(carts)
 
-def addItemEntry(item):
-    writeItems(getItems().append(item))
+def addItemEntryByObj(item):
+    items = getItems()
+    items.append(item)
+    writeItems(items)
 
-def addPurchaseEntry(purchase):
-    writePurchases(getPurchases().append(purchase))
+def addPurchaseEntryByObj(purchase):
+    purchases = getPurchases()
+    purchases.append(purchase)
+    writePurchases(purchases)
 
-def addUserEntry(user):
-    writeUsers(getUsers().append(user))
+def addUserEntryByObj(user):
+    users = getUsers()
+    users.append(user)
+    writeUsers(users)
 
-#add entries to tables raw data methods
-def addCartEntry(userid, itemid, quantity):
-    writeCarts(getCarts().append(Cart(userid,itemid,quantity)))
+#remove entries from tables by key
+def removeCartEntry(userid, itemid):
+    carts = getCarts()
 
-def addItemEntry(id, name, price, category, quantity):
-    writeItems(getItems().append(Item(id,name,price,category,quantity)))
+    for cart in carts:
+        if (int(cart.getUserID()) == int(userid) 
+            and int(cart.getItemID()) == int(itemid)):
+            carts.remove(cart)
+            break;
 
-def addPurchaseEntry(userid, itemid, quantity, time):
-    writePurchases(getPurchases().append(Purchase(userid,itemid,quantity,time)))
+    writeCarts(carts)
 
-def addUserEntry(id, name, password, address, email, phone):
-    writeUsers(getUsers().append(User(id,name,password,address,email,phone)))
+def removeItemEntry(itemid):
+    items = getItems()
+
+    for item in items:
+        if (int(item.getItemID()) == int(itemid)):
+            items.remove(item)
+            break;
+
+    writeCarts(items)
+
+def removePurchaseEntry(userid, itemid):
+    purchases = getPurchases()
+
+    for purchase in purchases:
+        if (int(purchase.getUserID) == int(userid) and int(purchase.getItemID) == int(itemid)):
+            purchases.remove(purchase)
+            break;
+
+    writePurchases(purchases)
+
+def removeUserEntry(id):
+    users = getUsers()
+
+    for user in users:
+        if (int(user.getID()) == int(id)):
+            users.remove(user)
+            break;
+
+    writeUsers(users)
