@@ -7,16 +7,16 @@ class Item:
 
 
     #constructor needs all information to instantiate object
-    def __init__(self, id, name, price, cateogry, quantity):
+    def __init__(self, id, name, price, category, quantity):
         self.id = id
         self.name = name
         self.price = price
-        self.cateogry = cateogry
+        self.category = category
         self.quantity = quantity
     
     #to string method
     def toString(self):
-        return (f'{self.id},{self.name},{self.price},{self.cateogry},{self.quantity}')
+        return (f'{self.id},{self.name},{self.price},{self.category},{self.quantity}')
 
     #getters
     def getID(self):
@@ -26,7 +26,7 @@ class Item:
     def getPrice(self):
         return self.price
     def getCategory(self):
-        return self.cateogry
+        return self.category
     def getQuantity(self):
         return self.quantity
 
@@ -35,9 +35,9 @@ class Item:
         self.id = id_
     def setName(self, name_):
         self.name = name_
-    def setAddress(self, price_):
+    def setPrice(self, price_):
         self.price = price_
-    def setEmail(self, category_):
+    def setCategory(self, category_):
         self.category = category_
-    def setPhoneNum(self, quantity_):
+    def setQuantity(self, quantity_):
         self.quantity = quantity_
