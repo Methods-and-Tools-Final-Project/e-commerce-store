@@ -8,6 +8,7 @@ from objs.item import Item
 from objs.purchase import Purchase
 from objs.user import User
 
+#get full contents of tables
 def getCarts():
     fileExists = exists("src/data/carts.csv")
 
@@ -82,16 +83,17 @@ def getUsers():
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) != 5):
+            if (len(parts) != 6):
                 raise Exception("Given line cannot be serialized to a user object: ", line)
             else:
-                retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4]))
+                retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]))
         
         return retList
 
     else:
         raise Exception("Users.csv file does not exist")
 
+#set full contents of tables
 def writeCarts(cartList):
     print("Writing passed list containing ", len(cartList), " carts to carts.csv")
     
@@ -160,3 +162,29 @@ def writeUsers(userList):
             
     else:
         raise Exception("Users.csv file does not exist")
+
+#add entries to tables object methods
+def addCartEntry(cart):
+    writeCarts(getCarts().append(cart))
+
+def addItemEntry(item):
+    writeItems(getItems().append(item))
+
+def addPurchaseEntry(purchase):
+    writePurchases(getPurchases().append(purchase))
+
+def addUserEntry(user):
+    writeUsers(getUsers().append(user))
+
+#add entries to tables raw data methods
+def addCartEntry(userid, itemid, quantity):
+    writeCarts(getCarts().append(Cart(userid,itemid,quantity)))
+
+def addItemEntry(id, name, price, category, quantity):
+    writeItems(getItems().append(Item(id,name,price,category,quantity)))
+
+def addPurchaseEntry(userid, itemid, quantity, time):
+    writePurchases(getPurchases().append(Purchase(userid,itemid,quantity,time)))
+
+def addUserEntry(id, name, password, address, email, phone):
+    writeUsers(getUsers().append(User(id,name,password,address,email,phone)))
