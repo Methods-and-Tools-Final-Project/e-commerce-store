@@ -211,10 +211,31 @@ def removeCartEntry(userid, itemid):
     writeCarts(carts)
 
 def removeItemEntry(itemid):
-    print()
+    items = getItems()
+
+    for item in items:
+        if (int(item.getItemID()) == int(itemid)):
+            items.remove(item)
+            break;
+
+    writeCarts(items)
 
 def removePurchaseEntry(userid, itemid):
-    print()
+    purchases = getPurchases()
+
+    for purchase in purchases:
+        if (int(purchase.getUserID) == int(userid) and int(purchase.getItemID) == int(itemid)):
+            purchases.remove(purchase)
+            break;
+
+    writePurchases(purchases)
 
 def removeUserEntry(id):
-    print()
+    users = getUsers()
+
+    for user in users:
+        if (int(user.getID()) == int(id)):
+            users.remove(user)
+            break;
+
+    writeUsers(users)
