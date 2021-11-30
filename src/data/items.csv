@@ -1,25 +1,25 @@
 1,Trumpet,1290.99,Instrument,10
-2,Trumpet MouthPiece,500.99,Parts,30
-3,Clarinet,1500.99,Instrument,5
-4,Reed,5.99,Parts,200
-5,Clarinet MouthPiece,200.99,Parts,9
-6,Baritone,1799.99,Instrument,4
-7,Guitar,859.99,Instrument,2
-8,Baritone MouthPiece,300.90,Parts,12
-9,Flute,888.99,Instrument,7
-10,MelloPhone,1794.99,Instrument,13
-11,MelloPhone Mouthpiece,199.99,Parts,17
-12,DrumSticks,32.99,Parts,28
-13,Snare Drum,100.19,Instrument,2
-14,Valve Oil,17.99,Supplies,190
-15,Trombone,1119.99,Instrument,10
-16,Trombone MouthPiece,298.99,Parts,9
-17,Tuba,4000.99,Instrument,1
-18,Tuba MouthPiece,510.99,Parts,14
-19,Saxophone,3092.31,Instrument,5
+2,Clarinet,1500.99,Instrument,5
+3,Baritone,1799.99,Instrument,4
+4,Guitar,859.99,Instrument,2
+5,Flute,888.99,Instrument,7
+6,Snare Drum,100.19,Instrument,2
+7,MelloPhone,1794.99,Instrument,13
+8,Saxophone,3092.31,Instrument,5
+9,Tuba,4000.99,Instrument,1
+10,Trombone,1119.99,Instrument,10
+11,Reed,5.99,Parts,200
+12,Trumpet MouthPiece,500.99,Parts,30
+13,Clarinet MouthPiece,200.99,Parts,9
+14,Baritone MouthPiece,300.90,Parts,12
+15,MelloPhone Mouthpiece,199.99,Parts,17
+16,DrumSticks,32.99,Parts,28
+17,Guitar Strings,89.99,Parts,32
+18,Trombone MouthPiece,298.99,Parts,9
+19,Tuba MouthPiece,510.99,Parts,14
 20,Saxophone MouthPiece,284.99,Parts,89
 21,Clarinet MusicBook,19.99,Supplies,42
 22,Baritone MusicBook,19.99,Supplies,42
 23,PercussionBook,19.99,Supplies,32
-24,Guitar Strings,89.99,Parts,32
+24,Valve Oil,17.99,Supplies,190
 25,GuitarBook,19.99,Supplies,20
