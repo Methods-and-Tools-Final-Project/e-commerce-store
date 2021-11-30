@@ -85,6 +85,8 @@ def shopping_function():
         print("")
     print("Welcome to our online shop!")
     print("We will now provide a categorized list of items you can purchase")
+    print("In order from left to right each column is:")
+    print("ID Number, Item Name, Price in Dollars, Category, Inventory Amount")
     items = IO.getItems()
     for item in items:
         print(item.toString())
@@ -154,7 +156,7 @@ def display_cart_function():
         else:
             print("You did not press 1. Please press 1 to return to the main menu.")
             print("")
-            user_choice = input("Please press 1 when you would like to return to the main menu!")
+            user_choice = input("Please press 1 when you would like to return to the main menu!  ")
     main_menu_function()
     
     
@@ -162,11 +164,12 @@ def remove_item_function():
     for x in range(50):
         print("")
     print("Here is a list of your current items.")
-    i = 1
-    #this number needs to be defined as cart number something#
-    while i < 50:
-    	print("Item #", i)
-    	i+1
+    print("From left to right columnwise we have: ")
+    print("Your secure UserID, ItemID, and the Quantity")
+    carts = IO.getCarts()
+    for cart in carts:
+        if cart.getUserID() == Security.userID:
+            print(cart.toString())
     user_choice = input("If you would like to choose an item to remove, please press 1: ")
     while user_choice == '1':
         remove_item = input("Please enter the number of the item you wish to remove. If you do not want to remove any more items please press a number not labled in your cart: ")
@@ -195,9 +198,10 @@ def view_orders_function():
 def cart_checkout_function():
     print("I have made a list of the current items in your cart.")
     print("")
-    #i = 1
-    #For i < Total cart # of items
-    #print each cart item
+    carts = IO.getCarts()
+    for cart in carts:
+        if cart.getUserID() == Security.userID:
+            print(cart.toString())
 
 def checkout_function():
     print("checkout menu things")
@@ -211,17 +215,14 @@ def checkout_function():
     if user_choice != '1':
         print("We are very sorry to hear that we had your information stored incorrectly. Could you please tell us which address is wrong?")
         while True:
-            user_second_choice = input("Please type 1 if your shipping address is wrong and 2 if your billing address is wrong. If it is correct please type any other number: ")
+            user_second_choice = input("Please type 1 if your billing address is wrong. If it is correct please type any other number: ")
             if user_second_choice == '1':
-                #update shipping address in database
-                shipping_address = input("Please enter your shipping address so we can properly store it in our database: ")
-            elif user_second_choice == '2':
                 #update billing address in database
                 billing_address = input("Please enter your billing address so that we can properly store it in our database: ")
             else:
-                print("Assuming that you didn't press 1 or 2, we will use the current information stored as your current address.")
+                print("Assuming that you didn't press 1, we will use the current information stored as your current address.")
                 break
-            user_second_choice = input("Please type 1 if your shipping address is wrong or 2 if your billing address is wrong. If it is correct, please type any number: ")
+            user_second_choice = input("Please type 1 if your billing address is wrong. If it is correct, please type any number: ")
     #display card number
     user_card_number = input("Is this card number correct? Press 1 if it is: ")
     if user_card_number != '1':
