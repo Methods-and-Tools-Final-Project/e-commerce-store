@@ -1,7 +1,8 @@
 import time
 import Security
 import IO
-
+import objs
+import data
 
 user_name = []
 pass_word = []
@@ -45,8 +46,6 @@ def account_create_function():
         print("")
     user_name = input("Please choose a username: ")
     #ADD USERNAME TO DATABASE HERE
-    #Do we need to add rules to the user and password
-    #or check to see if information already exists??
     pass_word = input("Please enter a password that is 8 characters long: ")
     if len(pass_word) < 8:
         while len(pass_word) < 8:
@@ -55,23 +54,11 @@ def account_create_function():
     #ADD EMAIL TO DATABASE
     phone_number = input("PLease enter your phone number: ")
     #ADD PHONE NUMBER TO DATABASE
-    billing_address_new = input("Please enter your billing address: ")
-    #ADD BILLING TO DATABASE
-    check_for_address = input("Are your shipping and billing addresses the same? Please type 1 for Yes and 2 for No: ")
-    while True:
-        if check_for_address == '1':
-            #ADD BILLING ADDRESS INTO SHIPPING ON DATABASE
-            print("I have added the shipping address information from your billing address.")
-            break
-        elif check_for_address == '2':
-            shipping_address = input("Please enter your shipping address: ")
-            #ADD SHIPPING TO DATABASE
-            break
-        else:
-            print("Your input was invalid. Please enter 1 or 2!")
-            check_for_address = input("Are your shipping and billing addresses the same? Please type 1 for Yes and 2 for No: ")        
+    billing_address = input("Please enter your billing address: ")
+    #ADD BILLING TO DATABASE        
     debit_card_number = input("Please enter a FAKE 16 digit debit card number: ")
     #ADD CARD TO DATABASE
+    IO.addUserEntryByObj(IO.User(IO.getUserKey(),user_name,Security.hash(pass_word),billing_address,email_new,phone_number,debit_card_number))
     main()
     
 def main_menu_function():
@@ -94,23 +81,23 @@ def main_menu_function():
         quit()
 
 def shopping_function():
-    #ACCESS DATABASE HERE OR SOMETHIN IDK
     for x in range(50):
         print("")
     print("Welcome to our online shop!")
     print("We will now provide a categorized list of items you can purchase")
+    items = IO.getItems()
+    for item in items:
+        print(item.toString())
     #PRINT INFO OUT ABOUT THE ITEMS
-    #FIGURE OUT HOW TO LET PEOPLE CHOOSE ONE
     user_choice = input("If you would like to shop for items, please press 1: ")
     while user_choice == '1':
         shop_choice = input("Please choose an item from the above list: ")
-        #BASED ON WHAT NUMBER THEY TYPE ADD THAT ITEM TO CART
         user_choice = input("If you would like to purchase another item, please press 1: ")
         if user_choice is not '1':
             print("You will now be returned to the main menu!")
             time.sleep(5)
             break
-            
+    main_menu_function()            
     
 
 def view_cart_function():

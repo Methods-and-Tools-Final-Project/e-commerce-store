@@ -15,7 +15,7 @@ class User:
         self.address = address
         self.email = email
         self.phoneNum = phoneNum
-        self.crditCard = creditCard
+        self.creditCard = creditCard
     
     #to string method
     def toString(self):
