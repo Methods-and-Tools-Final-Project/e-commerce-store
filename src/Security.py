@@ -1,6 +1,8 @@
 import IO
 import hashlib
 
+userID = []
+
 def validateUser(username, password):
     ret = False
 
@@ -8,6 +10,7 @@ def validateUser(username, password):
     for user in IO.getUsers():
         #if the name and password match something in the database
         if (user.getName().lower()==(username.lower()) and user.getPassword()==(hash(password))):
+            userID = user.getID()
             ret = True
             break;
 
