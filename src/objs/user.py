@@ -5,19 +5,21 @@ class User:
     _address: str
     _email: str
     _phoneNum: str
+    _creditCard: str
 
     #constructor needs all information to instantiate object
-    def __init__(self, id, name, password, address, email, phoneNum):
+    def __init__(self, id, name, password, address, email, phoneNum, creditCard):
         self.id = id
         self.name = name
         self.password = password
         self.address = address
         self.email = email
         self.phoneNum = phoneNum
+        self.crditCard = creditCard
     
     #to string method
     def toString(self):
-        return (f'{self.id},{self.name},{self.password},{self.address},{self.email},{self.phoneNum}')
+        return (f'{self.id},{self.name},{self.password},{self.address},{self.email},{self.phoneNum},{self.creditCard}')
 
     #getters
     def getID(self):
@@ -32,6 +34,8 @@ class User:
         return self.email
     def getPhoneNum(self):
         return self.phoneNum
+    def getCreditCard(self):
+        return self._creditCard
 
     #setters
     def setID(self, id_):
@@ -46,3 +50,5 @@ class User:
         self.email = email_
     def setPhoneNum(self, phoneNum_):
         self.phoneNum = phoneNum_
+    def setCreditCard(self, creditCard_):
+        self.creditCard = creditCard_
