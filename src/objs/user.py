@@ -35,7 +35,7 @@ class User:
     def getPhoneNum(self):
         return self.phoneNum
     def getCreditCard(self):
-        return self._creditCard
+        return self.creditCard
 
     #setters
     def setID(self, id_):
