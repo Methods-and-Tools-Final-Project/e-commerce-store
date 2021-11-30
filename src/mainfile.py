@@ -2,7 +2,7 @@ import time
 import Security
 import IO
 import objs
-import data
+from objs import cart
 
 user_name = []
 pass_word = []
@@ -92,6 +92,7 @@ def shopping_function():
     user_choice = input("If you would like to shop for items, please press 1: ")
     while user_choice == '1':
         shop_choice = input("Please choose an item from the above list: ")
+        IO.addCartEntryByObj(IO.Cart(Security.userID,shop_choice,1))
         user_choice = input("If you would like to purchase another item, please press 1: ")
         if user_choice is not '1':
             print("You will now be returned to the main menu!")
@@ -138,6 +139,10 @@ def view_cart_function():
 def display_cart_function():
     for x in range(50):
         print("")
+    carts = IO.getCarts()
+    for cart in carts:
+        if cart.getUserID() == Security.userID:
+            print(cart.toString())
     print("I have made a list of the current items in your cart.")
     #print out the items in the cart. Maybe include their prices, names, other useful info. taken from database i think
     user_choice = input("Please press 1 when you would like to return to the main menu!")
