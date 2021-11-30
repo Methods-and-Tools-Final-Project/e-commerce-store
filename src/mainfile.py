@@ -1,4 +1,5 @@
 import time
+import Security
 user_name = []
 pass_word = []
 shipping_address = []
@@ -26,18 +27,15 @@ def login_function():
         print("")
     user_name = input("Please enter your username: ")
     pass_word = input("Please enter your password: ")
-    #COMPARE TO WHAT IS IN DATABASE HERE. Maybe a while loop here to continuously check it to make sure that it matches idk
-    #if statement checking if database check returns true
-    if True:
+    if Security.validateUser(user_name,pass_word):
 	#for more user friendlyness: probable should print: logging in now
         print("You are being logged in to your account!")
         time.sleep(5)
         main_menu_function()
-    if False:
+    else:
         print("Your username and password did not match our database. Please re-enter them.")
         login_function()
               
-        
 
 def account_create_function():
     for x in range(50):
