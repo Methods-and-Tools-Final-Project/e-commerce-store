@@ -3,6 +3,7 @@
 # of this class and then the method to write the objects to the files should be invoked from this class
 
 import os
+import random
 from os.path import exists
 from objs.cart import Cart
 from objs.item import Item
@@ -84,10 +85,10 @@ def getUsers():
         for line in lines:
             parts = str(line).split(",")
 
-            if (len(parts) != 6):
+            if (len(parts) != 7):
                 raise Exception("Given line cannot be serialized to a user object: ", line)
             else:
-                retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]))
+                retList.append(User(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]))
         
         return retList
 
@@ -239,3 +240,20 @@ def removeUserEntry(id):
             break;
 
     writeUsers(users)
+
+def getUserKey():
+    rand = random.randint(0,69420)
+
+    exists = False
+
+    users = getUsers()
+
+    for user in users:
+        if user.getID() == rand:
+            exists = True
+            break;
+
+    if exists:
+        return getUserKey()
+    else:
+        return rand
