@@ -292,5 +292,5 @@ def personal_info_function():
         user_if_change = input("If you would like to change something else, please press 1: ")
     main_menu_function()
 
-
-main()
+if __name__ == "__main__":
+    main()
