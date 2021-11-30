@@ -1,5 +1,8 @@
 import time
 import Security
+import IO
+
+
 user_name = []
 pass_word = []
 shipping_address = []
@@ -40,15 +43,18 @@ def login_function():
 def account_create_function():
     for x in range(50):
         print("")
-    print("I did made it here")
     user_name = input("Please choose a username: ")
     #ADD USERNAME TO DATABASE HERE
     #Do we need to add rules to the user and password
     #or check to see if information already exists??
-    pass_word = input("Please enter a password: ")
-    #Somehow need to make sure it is at least 8 characters here
+    pass_word = input("Please enter a password that is 8 characters long: ")
+    if len(pass_word) < 8:
+        while len(pass_word) < 8:
+            pass_word = input("Your password was not 8 characters long at a minimum. Please try again: ")
     email_new = input("Please enter an email address: ")
     #ADD EMAIL TO DATABASE
+    phone_number = input("PLease enter your phone number: ")
+    #ADD PHONE NUMBER TO DATABASE
     billing_address_new = input("Please enter your billing address: ")
     #ADD BILLING TO DATABASE
     check_for_address = input("Are your shipping and billing addresses the same? Please type 1 for Yes and 2 for No: ")
