@@ -194,13 +194,14 @@ def remove_item_function():
     while user_choice == '1':
         remove_item = input("Please enter the number of the item you wish to remove. If you do not want to remove any more items please press a number not labled in your cart: ")
 
-        if int(remove_item) < 26:
+        if remove_item < '26':
             #NEED TO REMOVE ITEMS FROM CART
             carts = IO.getCarts()
             updated_carts = []
             for cart in carts:
-                if cart.getUserID() != Security.getUserID() and remove_item != cart.getItemID():
-                    updated_carts.append(carts)
+                if not (cart.getUserID() == Security.getUserID() and remove_item == cart.getItemID()):
+                    updated_carts.append(cart)
+     
             IO.writeCarts(updated_carts)                    
             print("The item has been removed!")
         else:
@@ -383,8 +384,6 @@ def personal_info_function():
                 if user.getID() == Security.getUserID():
                     user.setCreditCard(debit_card_number)
                     break
-
-            IO.writeUsers(users)
 
         else:
             print("You will now be transferred back to the Main Menu!")

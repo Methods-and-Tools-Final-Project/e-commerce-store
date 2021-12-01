@@ -98,21 +98,19 @@ def getUsers():
 #set full contents of tables
 def writeCarts(cartList):
     fileExists = exists("src/data/carts.csv")
-    print(len(cartList))
-    print(cartList)
+   
     if (fileExists):
         lines = []
 
         for cart in cartList:
             lines.append(cart.toString())
 
-        print(len(lines))
-
         f = open('src/data/carts.csv', 'w')
+
         for line in lines:
-            if len(line) != 0:
-                f.write(line)
-        f.write("\n")
+            if len(line) > 0:
+                f.write(line.strip())
+                f.write("\n")
             
     else:
         raise Exception("Carts.csv file does not exist")
@@ -130,9 +128,9 @@ def writeItems(itemList):
 
         f = open('src/data/items.csv', 'w')
         for line in lines:
-            if len(line) != 0:
-                f.write(line)
-        f.write("\n")
+            if len(line) > 0:
+                f.write(line.strip())
+                f.write("\n")
             
     else:
         raise Exception("Items.csv file does not exist")
@@ -151,9 +149,9 @@ def writePurchases(purchaseList):
 
         f = open('src/data/purchases.csv', 'w')
         for line in lines:
-            if len(line) != 0:
-                f.write(line)
-        f.write("\n")
+            if len(line) > 0:
+                f.write(line.strip())
+                f.write("\n")
             
     else:
         raise Exception("Purchases.csv file does not exist")
@@ -171,9 +169,12 @@ def writeUsers(userList):
         print(len(lines))
 
         f = open('src/data/users.csv', 'w')
+        
         for line in lines:
-            if len(line) != 0:
-                f.write(line)
+            if len(line) > 0:
+                f.write(line.strip())
+                f.write("\n")
+
         f.write("\n")
             
     else:
