@@ -283,6 +283,9 @@ def checkout_function():
         time.sleep(5)
         main_menu_function()
     print("Your order has been placed! Thank you for your patronage, and we will now reroute you to the main menu!")
+    #remove all items from cart with user id
+    #move those to purhcase and add a time to it
+    #subtract the inventory from items.csv
     time.sleep(5)
     main_menu_function()
 
@@ -306,22 +309,76 @@ def personal_info_function():
         user_choice = input("Please enter 1, 2, or any number above: ")
         if user_choice == '1':
             username_new = input("Please enter a new username: ")
-            #UPDATE USERNAME TO DATABASE HERE
+
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setName(username_new)
+                    break;
+
+            IO.writeUsers(users)
+
         elif user_choice == '2':
             password_new = input("Please enter a new password: ")
-            #UPDATE PASSWORD TO DATABASE HERE
+            
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setPassword(Security.hash(password_new))
+                    break;
+
+            IO.writeUsers(users)
+
         elif user_choice == '3':
             email = input("Please enter a new email: ")
-            #UPDATE EMAIL TO DATABASE HERE
+            
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setEmail(email)
+                    break;
+
+            IO.writeUsers(users)
+
         elif user_choice == '4':
             billing_address = input("Please enter a new billing address: ")
-            #UPDATE BILLING TO DATABASE HERE
+            
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setAddress(billing_address)
+                    break;
+
+            IO.writeUsers(users)
+
         elif user_choice == '5':
             shipping_address = input("Please enter a new shipping address: ")
-            #UPDATE SHIPPING TO DATABASE HERE
+            
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setAddress(shipping_address)
+                    break;
+
+            IO.writeUsers(users)
+
         elif user_choice == '6':
             debit_card_number = input("Please enter new payment information: ")
-            #UPDATE PAYMENT TO DATABASE HERE
+            
+            users = IO.getUsers()
+
+            for user in users:
+                if user.getID() == Security.getUserID():
+                    user.setCreditCard(debit_card_number)
+                    break;
+
+            IO.writeUsers(users)
+
         else:
             print("You will now be transferred back to the Main Menu!")
             time.sleep(5)
