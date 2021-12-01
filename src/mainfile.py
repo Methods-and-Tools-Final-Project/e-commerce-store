@@ -147,12 +147,6 @@ def view_cart_function():
             break
         user_menu_choice = input("Would you like to choose another option? If so, please press 1: ")
     main_menu_function()
-
-    #CHECKOUT IN HERE
-    #DISPLAY ALL ITEMS IN CART
-    #REMOVE ITEMS FROM CART
-    #RETURN TO MAIN MENU
-    #VIEW PREVIOUS ORDERS
     
 def display_cart_function():
     for x in range(50):
@@ -216,7 +210,11 @@ def view_orders_function():
         print("")
 
     print("Here is a list of your previous orders!")
-    #DISPLAY PREVIOUS ORDERS. IF there are multiple, write an if statement
+
+    for purchase in IO.getPurchases():
+        if purchase.getUserID() == Security.getUserID():
+            print(purchase)
+
     print("You will now be sent back to the main menu! Thank you for your continued patronage!")
     time.sleep(5)
     main_menu_function()
@@ -277,7 +275,6 @@ def checkout_function():
     main_menu_function()
 
 def personal_info_function():
-    #editing personal info stuff
     for x in range(50):
         print("")
 
