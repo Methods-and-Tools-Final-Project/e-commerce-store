@@ -236,8 +236,18 @@ def checkout_function():
 
     print("Welcome to the checkout page!")
     cart_checkout_function()
-    #PULL ADDRESSES FROM DATABASE STORE IN VARIABLES
-    #Display addresses
+    
+    currentAddressToPrint = ""
+    currentCardToPrint = ""
+
+    for user in IO.getUsers():
+        if user.getID() == Security.getUserID():
+            currentAddressToPrint = user.getAddress()
+            currentCardToPrint = user.getCreditCard()
+            break;
+
+    print("Address:",currentAddressToPrint)
+
     user_choice = input("Is this shipping and billing information correct? Please press 1 if it is: ")
     if user_choice != '1':
         print("We are very sorry to hear that we had your information stored incorrectly. Could you please tell us which address is wrong?")
@@ -250,7 +260,9 @@ def checkout_function():
                 print("Assuming that you didn't press 1, we will use the current information stored as your current address.")
                 break
             user_second_choice = input("Please type 1 if your billing address is wrong. If it is correct, please type any number: ")
-    #display card number
+    
+    print("Card number:",currentCardToPrint)
+
     user_card_number = input("Is this card number correct? Press 1 if it is: ")
     if user_card_number != '1':
         print("We are very sorry to hear that we had your information stored incorrectly. Could you please tell us the correct card number?")
