@@ -124,8 +124,6 @@ def writeItems(itemList):
         for item in itemList:
             lines.append(item.toString())
 
-        print(len(lines))
-
         f = open('src/data/items.csv', 'w')
         for line in lines:
             if len(line) > 0:
@@ -145,7 +143,6 @@ def writePurchases(purchaseList):
         for purchase in purchaseList:
             lines.append(purchase.toString())
 
-        print(len(lines))
 
         f = open('src/data/purchases.csv', 'w')
         for line in lines:
@@ -166,7 +163,6 @@ def writeUsers(userList):
         for user in userList:
             lines.append(user.toString())
 
-        print(len(lines))
 
         f = open('src/data/users.csv', 'w')
         

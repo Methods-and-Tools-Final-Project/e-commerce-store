@@ -357,8 +357,7 @@ def checkout_function():
             items.append(item)
 
         IO.writeItems(items)
-        IO.addPurchaseEntryByObj(purchase=Purchase(cart.getUserID().strip(), 
-        cart.getItemID().strip(), cart.getQuantity().strip(), int(time.time())))
+        IO.addPurchaseEntryByObj(purchase=Purchase(cart.getUserID().strip(), cart.getItemID().strip(), cart.getQuantity().strip(), int(time.time())))
 
     time.sleep(5)
     main_menu_function()
