@@ -17,6 +17,7 @@ def main():
     print("2. Create Account")
     print("Any other Number: Close application")
     user_choice = input("Please enter 1, 2, or any number: ")
+
     if user_choice == '1':
         login_function()
     elif user_choice == '2':
@@ -29,17 +30,17 @@ def main():
 def login_function():
     for x in range(50):
         print("")
+
     user_name = input("Please enter your username: ")
     pass_word = input("Please enter your password: ")
+
     if Security.validateUser(user_name,pass_word):
-	#for more user friendlyness: probable should print: logging in now
         print("You are being logged in to your account!")
         time.sleep(5)
         main_menu_function()
     else:
         print("Your username and password did not match our database. Please re-enter them.")
-        login_function()
-              
+        login_function()    
 
 def account_create_function():
     for x in range(50):
@@ -72,13 +73,16 @@ def account_create_function():
 def main_menu_function():
     for x in range(50):
         print("")
+
     print("Thank you for logging in and your continued patronage is appreciated.")
     print("There are several options you can do now. You like to shop for items, view your cart, edit personal info, or logout(Closing the application)")
     print("1. Shop for Instruments")
     print("2. View Cart")
     print("3. Edit Personal Information")
     print("Any other number: Logoff")
+
     menu_choice = input("Please enter one of the numbers above: ")
+
     if menu_choice == '1':
         shopping_function()
     elif menu_choice == '2':
@@ -91,14 +95,17 @@ def main_menu_function():
 def shopping_function():
     for x in range(50):
         print("")
+
     print("Welcome to our online shop!")
     print("We will now provide a categorized list of items you can purchase")
     print("In order from left to right each column is:")
     print("ID Number, Item Name, Price in Dollars, Category, Inventory Amount")
+
     items = IO.getItems()
+
     for item in items:
         print(item.toString())
-    #PRINT INFO OUT ABOUT THE ITEMS
+
     user_choice = input("If you would like to shop for items, please press 1: ")
     while user_choice == '1':
         shop_choice = input("Please choose an item from the above list: ")
@@ -108,13 +115,12 @@ def shopping_function():
             print("You will now be returned to the main menu!")
             time.sleep(5)
             break
-    main_menu_function()            
-    
+    main_menu_function()
 
 def view_cart_function():
-    #cart stuff here
     for x in range(50):
         print("")
+
     print("Welcome to the cart menu!")
     print("Here you can access your cart, checkout, and many other things.")
     print("1. Display Items in cart.")
@@ -122,7 +128,9 @@ def view_cart_function():
     print("3. View Previous orders.")
     print("4. Checkout!")
     print("Any other Number. Return to Main menu")
+
     user_choice = input("If you would like to access one of these options please press 1: ")
+
     while user_choice == '1':
         user_menu_choice = input("Which option would you like to choose? Please press 1, or any number listed above: ")
         if user_menu_choice == '1':
@@ -149,13 +157,15 @@ def view_cart_function():
 def display_cart_function():
     for x in range(50):
         print("")
+
     carts = IO.getCarts()
     for cart in carts:
         if cart.getUserID() == Security.getUserID():
             print(cart.toString())
+
     print("I have made a list of the current items in your cart.")
-    #print out the items in the cart. Maybe include their prices, names, other useful info. taken from database i think
     user_choice = input("Please press 1 when you would like to return to the main menu!")
+
     while True:
         if user_choice == '1':
             print("You will now be returned to the main menu!")
@@ -167,27 +177,33 @@ def display_cart_function():
             user_choice = input("Please press 1 when you would like to return to the main menu!  ")
     main_menu_function()
     
-    
 def remove_item_function():
     for x in range(50):
         print("")
+
     print("Here is a list of your current items.")
     print("From left to right columnwise we have: ")
     print("Your secure UserID, ItemID, and the Quantity")
+
     carts = IO.getCarts()
     for cart in carts:
         if cart.getUserID() == Security.getUserID():
             print(cart.toString())
+
     user_choice = input("If you would like to choose an item to remove, please press 1: ")
+
     while user_choice == '1':
         remove_item = input("Please enter the number of the item you wish to remove. If you do not want to remove any more items please press a number not labled in your cart: ")
+
         if remove_item <= 50:
             print("The item has been removed!")
         else:
             print("We will assume that you do not want to remove any more items from your cart and we will now send you back to the main menu.")
             time.sleep(5)
             break
+
         user_if_change = input("If you would like to remove another item, please press 1: ")
+
     print("Your items have been successfully removed from your cart. We will now send you back to the main menu!")
     time.sleep(5)
     main_menu_function()
@@ -195,8 +211,10 @@ def remove_item_function():
 
 def view_orders_function():
     print("previous orders here")
+
     for x in range(50):
         print("")
+
     print("Here is a list of your previous orders!")
     #DISPLAY PREVIOUS ORDERS. IF there are multiple, write an if statement
     print("You will now be sent back to the main menu! Thank you for your continued patronage!")
@@ -206,6 +224,7 @@ def view_orders_function():
 def cart_checkout_function():
     print("I have made a list of the current items in your cart.")
     print("")
+
     carts = IO.getCarts()
     for cart in carts:
         if cart.getUserID() == Security.getUserID():
@@ -213,8 +232,10 @@ def cart_checkout_function():
 
 def checkout_function():
     print("checkout menu things")
+
     for x in range(50):
         print("")
+
     print("Welcome to the checkout page!")
     cart_checkout_function()
     #PULL ADDRESSES FROM DATABASE STORE IN VARIABLES
@@ -255,11 +276,11 @@ def checkout_function():
     time.sleep(5)
     main_menu_function()
 
-
 def personal_info_function():
     #editing personal info stuff
     for x in range(50):
         print("")
+
     print("Time to update your personal information.")
     print("Please! Choose 1 of the following options based on what information you would like to update.")
     print("1. Username")
@@ -269,7 +290,9 @@ def personal_info_function():
     print("5. Shipping Address")
     print("6. Payment Info")
     print("Any other Number: Back to the Main Menu")
+
     user_if_change = input("If you would like to change something please press 1. If you do not want anything changed press any number besides 1: ")
+
     while user_if_change == '1':
         user_choice = input("Please enter 1, 2, or any number above: ")
         if user_choice == '1':
