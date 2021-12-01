@@ -98,7 +98,8 @@ def getUsers():
 #set full contents of tables
 def writeCarts(cartList):
     fileExists = exists("src/data/carts.csv")
-
+    print(len(cartList))
+    print(cartList)
     if (fileExists):
         lines = []
 

@@ -194,15 +194,21 @@ def remove_item_function():
     while user_choice == '1':
         remove_item = input("Please enter the number of the item you wish to remove. If you do not want to remove any more items please press a number not labled in your cart: ")
 
-        if remove_item <= 50:
+        if int(remove_item) < 26:
             #NEED TO REMOVE ITEMS FROM CART
+            carts = IO.getCarts()
+            updated_carts = []
+            for cart in carts:
+                if cart.getUserID() != Security.getUserID() and remove_item != cart.getItemID():
+                    updated_carts.append(carts)
+            IO.writeCarts(updated_carts)                    
             print("The item has been removed!")
         else:
             print("We will assume that you do not want to remove any more items from your cart and we will now send you back to the main menu.")
             time.sleep(5)
             break
 
-        user_if_change = input("If you would like to remove another item, please press 1: ")
+        user_choice = input("If you would like to remove another item, please press 1: ")
 
     print("Your items have been successfully removed from your cart. We will now send you back to the main menu!")
     time.sleep(5)
