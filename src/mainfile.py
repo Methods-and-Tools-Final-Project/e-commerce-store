@@ -254,23 +254,45 @@ def checkout_function():
         while True:
             user_card = input("Please type 1 to change your card number associated with your account: ")
             if user_card == '1':
-                #update card number in database
                 card_number = input("Please enter your correct card number that you would like associated with your account: ")
+
+                users = IO.getUsers()
+
+                for user in users:
+                    if user.getID() == Security.getUserID():
+                        user.setCreditCard(card_number)
+                        break;
+
+                IO.writeUsers(users)
+
                 break
             else:
                 print("We will assume that your card information is now correct. Thank you for giving us this information!")
                 break
     print("Here is your order! Please confirm that it is correct!")
-    #print order details here. Make sure to display price total
+
+    runningPrice = 0.0
+
+    for cart in IO.getCarts():
+        if cart.getUserID() == Security.getUserID():
+            print(cart)
+            for item in IO.getItems():
+                if item.getID() == cart.getItemID():
+                    runningPrice = runningPrice + (item.getPrice() * cart.getQuantity())
+
+    print("Total cost: $",runningPrice)
+
     user_third_choice = input("Please press 1 to confirm that your order is correct: ")
     if user_third_choice != 1:
         print("We will now reroute you to the main menu. From there you can go to the shopping area or open up the cart area so that you can remove items")
         time.sleep(5)
         main_menu_function()
     print("Your order has been placed! Thank you for your patronage, and we will now reroute you to the main menu!")
+
     #remove all items from cart with user id
     #move those to purhcase and add a time to it
     #subtract the inventory from items.csv
+
     time.sleep(5)
     main_menu_function()
 
