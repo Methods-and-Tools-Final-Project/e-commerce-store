@@ -10,6 +10,8 @@ billing_address = []
 card_number = []
 
 def main():
+    for x in range(50):
+        print("")
     print("Hello! Welcome to _____ Emporium where we sell all kinds of instruments")
     print("Please! Choose 1 of the following options based on what you would like to do.")
     print("1. Login to Account")
@@ -66,6 +68,8 @@ def account_create_function():
     debit_card_number = input("Please enter a FAKE 16 digit debit card number: ")
     
     IO.addUserEntryByObj(IO.User(IO.getUserKey(),user_name,Security.hash(pass_word),billing_address,email_new,phone_number,debit_card_number))
+    print("Thank you for creating an account. We will now transport you back to the login menu so that you can log in to your new account!")
+    time.sleep(5)
 
     main()
     
@@ -89,6 +93,8 @@ def main_menu_function():
     elif menu_choice == '3':
         personal_info_function()
     else:
+        print("Thank you for shopping with us! We will now log you out!")
+        time.sleep(5)
         quit()
 
 def shopping_function():
@@ -99,12 +105,13 @@ def shopping_function():
     print("We will now provide a categorized list of items you can purchase")
     print("In order from left to right each column is:")
     print("ID Number, Item Name, Price in Dollars, Category, Inventory Amount")
+    print("********************************************************************")
 
     items = IO.getItems()
 
     for item in items:
         print(item.toString())
-
+    print("")
     user_choice = input("If you would like to shop for items, please press 1: ")
     while user_choice == '1':
         shop_choice = input("Please choose an item from the above list: ")
@@ -151,13 +158,12 @@ def display_cart_function():
     for x in range(50):
         print("")
 
+    print("I have made a list of the current items in your cart.")
     carts = IO.getCarts()
     for cart in carts:
         if cart.getUserID() == Security.getUserID():
             print(cart.toString())
-
-    print("I have made a list of the current items in your cart.")
-    user_choice = input("Please press 1 when you would like to return to the main menu!")
+    user_choice = input("Please press 1 when you would like to return to the main menu! ")
 
     while True:
         if user_choice == '1':
@@ -189,6 +195,7 @@ def remove_item_function():
         remove_item = input("Please enter the number of the item you wish to remove. If you do not want to remove any more items please press a number not labled in your cart: ")
 
         if remove_item <= 50:
+            #NEED TO REMOVE ITEMS FROM CART
             print("The item has been removed!")
         else:
             print("We will assume that you do not want to remove any more items from your cart and we will now send you back to the main menu.")
@@ -243,7 +250,7 @@ def checkout_function():
         if user.getID() == Security.getUserID():
             currentAddressToPrint = user.getAddress()
             currentCardToPrint = user.getCreditCard()
-            break;
+            break
 
     print("Address:",currentAddressToPrint)
     print("Card number:",currentCardToPrint)
@@ -261,7 +268,7 @@ def checkout_function():
                 for user in users:
                     if user.getID() == Security.getUserID():
                         user.setCreditCard(card_number)
-                        break;
+                        break
 
                 IO.writeUsers(users)
 
@@ -321,7 +328,7 @@ def personal_info_function():
             for user in users:
                 if user.getID() == Security.getUserID():
                     user.setName(username_new)
-                    break;
+                    break
 
             IO.writeUsers(users)
 
@@ -333,7 +340,7 @@ def personal_info_function():
             for user in users:
                 if user.getID() == Security.getUserID():
                     user.setPassword(Security.hash(password_new))
-                    break;
+                    break
 
             IO.writeUsers(users)
 
@@ -345,7 +352,7 @@ def personal_info_function():
             for user in users:
                 if user.getID() == Security.getUserID():
                     user.setEmail(email)
-                    break;
+                    break
 
             IO.writeUsers(users)
 
@@ -357,7 +364,7 @@ def personal_info_function():
             for user in users:
                 if user.getID() == Security.getUserID():
                     user.setAddress(billing_address)
-                    break;
+                    break
 
             IO.writeUsers(users)
 
@@ -369,7 +376,7 @@ def personal_info_function():
             for user in users:
                 if user.getID() == Security.getUserID():
                     user.setCreditCard(debit_card_number)
-                    break;
+                    break
 
             IO.writeUsers(users)
 
