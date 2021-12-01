@@ -174,8 +174,6 @@ def writeUsers(userList):
             if len(line) > 0:
                 f.write(line.strip())
                 f.write("\n")
-
-        f.write("\n")
             
     else:
         raise Exception("Useres.csv file does not exist")

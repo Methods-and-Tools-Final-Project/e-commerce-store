@@ -82,6 +82,7 @@ def main_menu_function():
     print("1. Shop for Instruments")
     print("2. View Cart")
     print("3. Edit Personal Information")
+    print("4. Delete Account")
     print("Any other number: Logoff")
 
     menu_choice = input("Please enter one of the numbers above: ")
@@ -92,10 +93,39 @@ def main_menu_function():
         view_cart_function()
     elif menu_choice == '3':
         personal_info_function()
+    elif menu_choice == '4':
+        delete_user()
     else:
         print("Thank you for shopping with us! We will now log you out!")
         time.sleep(5)
         quit()
+
+def delete_user():
+    carts = IO.getCarts()
+    
+    updated_carts = []
+
+    for cart in carts:
+        if cart.getUserID() != Security.getUserID():
+            updated_carts.append(cart)
+
+    IO.writeCarts(updated_carts)
+
+    updated_purchases = []
+
+    for purchase in IO.getPurchases():
+        if purchase.getUserID() != Security.getUserID():
+            updated_purchases.append(purchase)
+
+    IO.writePurchases(updated_purchases)
+
+    updated_users = []
+
+    for user in IO.getUsers():
+        if user.getID() != Security.getUserID():
+            updated_users.append(user)
+
+    IO.writeUsers(updated_users)
 
 def shopping_function():
     for x in range(50):
