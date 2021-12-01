@@ -44,21 +44,29 @@ def login_function():
 def account_create_function():
     for x in range(50):
         print("")
+
+    global user_name
     user_name = input("Please choose a username: ")
-    #ADD USERNAME TO DATABASE HERE
+
+    global pass_word
     pass_word = input("Please enter a password that is 8 characters long: ")
+
     if len(pass_word) < 8:
         while len(pass_word) < 8:
-            pass_word = input("Your password was not 8 characters long at a minimum. Please try again: ")
+            pass_word = input("Your password was not 8 characters long at aminimum. Please try again: ")
+
+    global email_new
+    global phone_number
+    global billing_address
+    global debit_card_number
+
     email_new = input("Please enter an email address: ")
-    #ADD EMAIL TO DATABASE
     phone_number = input("PLease enter your phone number: ")
-    #ADD PHONE NUMBER TO DATABASE
-    billing_address = input("Please enter your billing address: ")
-    #ADD BILLING TO DATABASE        
+    billing_address = input("Please enter your billing address: ")    
     debit_card_number = input("Please enter a FAKE 16 digit debit card number: ")
-    #ADD CARD TO DATABASE
+    
     IO.addUserEntryByObj(IO.User(IO.getUserKey(),user_name,Security.hash(pass_word),billing_address,email_new,phone_number,debit_card_number))
+
     main()
     
 def main_menu_function():
@@ -94,7 +102,7 @@ def shopping_function():
     user_choice = input("If you would like to shop for items, please press 1: ")
     while user_choice == '1':
         shop_choice = input("Please choose an item from the above list: ")
-        IO.addCartEntryByObj(IO.Cart(Security.userID,shop_choice,1))
+        IO.addCartEntryByObj(IO.Cart(Security.getUserID(),shop_choice,1))
         user_choice = input("If you would like to purchase another item, please press 1: ")
         if user_choice is not '1':
             print("You will now be returned to the main menu!")
@@ -143,7 +151,7 @@ def display_cart_function():
         print("")
     carts = IO.getCarts()
     for cart in carts:
-        if cart.getUserID() == Security.userID:
+        if cart.getUserID() == Security.getUserID():
             print(cart.toString())
     print("I have made a list of the current items in your cart.")
     #print out the items in the cart. Maybe include their prices, names, other useful info. taken from database i think
@@ -168,7 +176,7 @@ def remove_item_function():
     print("Your secure UserID, ItemID, and the Quantity")
     carts = IO.getCarts()
     for cart in carts:
-        if cart.getUserID() == Security.userID:
+        if cart.getUserID() == Security.getUserID():
             print(cart.toString())
     user_choice = input("If you would like to choose an item to remove, please press 1: ")
     while user_choice == '1':
@@ -200,7 +208,7 @@ def cart_checkout_function():
     print("")
     carts = IO.getCarts()
     for cart in carts:
-        if cart.getUserID() == Security.userID:
+        if cart.getUserID() == Security.getUserID():
             print(cart.toString())
 
 def checkout_function():
