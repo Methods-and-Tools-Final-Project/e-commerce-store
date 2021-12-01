@@ -6,7 +6,6 @@ from objs import cart
 
 user_name = []
 pass_word = []
-shipping_address = []
 billing_address = []
 card_number = []
 
@@ -247,20 +246,6 @@ def checkout_function():
             break;
 
     print("Address:",currentAddressToPrint)
-
-    user_choice = input("Is this shipping and billing information correct? Please press 1 if it is: ")
-    if user_choice != '1':
-        print("We are very sorry to hear that we had your information stored incorrectly. Could you please tell us which address is wrong?")
-        while True:
-            user_second_choice = input("Please type 1 if your billing address is wrong. If it is correct please type any other number: ")
-            if user_second_choice == '1':
-                #update billing address in database
-                billing_address = input("Please enter your billing address so that we can properly store it in our database: ")
-            else:
-                print("Assuming that you didn't press 1, we will use the current information stored as your current address.")
-                break
-            user_second_choice = input("Please type 1 if your billing address is wrong. If it is correct, please type any number: ")
-    
     print("Card number:",currentCardToPrint)
 
     user_card_number = input("Is this card number correct? Press 1 if it is: ")
@@ -299,8 +284,7 @@ def personal_info_function():
     print("2. Password")
     print("3. Email")
     print("4. Billing Address")
-    print("5. Shipping Address")
-    print("6. Payment Info")
+    print("5. Payment Info")
     print("Any other Number: Back to the Main Menu")
 
     user_if_change = input("If you would like to change something please press 1. If you do not want anything changed press any number besides 1: ")
@@ -356,18 +340,6 @@ def personal_info_function():
             IO.writeUsers(users)
 
         elif user_choice == '5':
-            shipping_address = input("Please enter a new shipping address: ")
-            
-            users = IO.getUsers()
-
-            for user in users:
-                if user.getID() == Security.getUserID():
-                    user.setAddress(shipping_address)
-                    break;
-
-            IO.writeUsers(users)
-
-        elif user_choice == '6':
             debit_card_number = input("Please enter new payment information: ")
             
             users = IO.getUsers()
