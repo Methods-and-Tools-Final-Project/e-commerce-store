@@ -3,6 +3,7 @@ import Security
 import IO
 import objs
 from objs import cart
+from objs.purchase import Purchase
 
 user_name = []
 pass_word = []
@@ -319,23 +320,45 @@ def checkout_function():
 
     for cart in IO.getCarts():
         if cart.getUserID() == Security.getUserID():
-            print(cart)
+            print(cart.toString())
             for item in IO.getItems():
                 if item.getID() == cart.getItemID():
-                    runningPrice = runningPrice + (item.getPrice() * cart.getQuantity())
+                    runningPrice = runningPrice + (float(item.getPrice()) * float(cart.getQuantity()))
 
     print("Total cost: $",runningPrice)
 
     user_third_choice = input("Please press 1 to confirm that your order is correct: ")
-    if user_third_choice != 1:
+    if user_third_choice != '1':
         print("We will now reroute you to the main menu. From there you can go to the shopping area or open up the cart area so that you can remove items")
         time.sleep(5)
         main_menu_function()
     print("Your order has been placed! Thank you for your patronage, and we will now reroute you to the main menu!")
 
-    #remove all items from cart with user id
-    #move those to purhcase and add a time to it
-    #subtract the inventory from items.csv
+    carts = IO.getCarts()
+    writeCarts = []
+    userCarts = []
+
+    for cart in carts:
+        if cart.getUserID() == Security.getUserID():
+            userCarts.append(cart)
+        else:
+            writeCarts.append(cart)
+
+    IO.writeCarts(writeCarts)
+
+    for cart in userCarts:
+        id = cart.getItemID()
+
+        items = []
+
+        for item in IO.getItems():
+            if item.getID() == id:
+                item.setQuantity(int(item.getQuantity()) - 1)
+            items.append(item)
+
+        IO.writeItems(items)
+        IO.addPurchaseEntryByObj(purchase=Purchase(cart.getUserID().strip(), 
+        cart.getItemID().strip(), cart.getQuantity().strip(), int(time.time())))
 
     time.sleep(5)
     main_menu_function()
