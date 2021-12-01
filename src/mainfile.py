@@ -257,7 +257,7 @@ def view_orders_function():
 
     for purchase in IO.getPurchases():
         if purchase.getUserID() == Security.getUserID():
-            print(purchase)
+            print(purchase.toString())
 
     print("You will now be sent back to the main menu! Thank you for your continued patronage!")
     time.sleep(5)
